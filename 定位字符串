@@ -1,0 +1,67 @@
+//定位字符串
+#include <stdio.h>
+
+char *locatesubstr(char *str1,char *str2);
+int main()
+{
+    char str1[505],str2[505];
+    char *p;
+    gets(str1);
+    gets(str2);
+    
+    p=locatesubstr(str1,str2);
+    
+    if(p==NULL){
+    	printf("NULL!\n");
+	}else{
+		puts(p);
+	}    
+    
+    return 0;
+}
+
+/* 请在这里填写答案 */
+int my_len(char*str);
+char *locatesubstr(char *str1,char *str2){
+	int ok=0;
+	int i=0;
+	int j=0;
+	char*p;
+	int len=my_len(str1);
+	int len1=my_len(str2); 
+	if(len1 == 0 || len1 > len) {
+        return NULL;
+    }
+	for(i=0;i<=len-len1;i++){
+		
+		int judge=1;
+		for(j=i;j<i+len1;j++){
+			if(str1[j]==str2[j-i]){
+				judge*=1;
+			}else{
+				judge*=0;
+			}
+		}
+		
+		 
+		if(judge==1){
+			
+			p=&str1[i];
+			ok=1;
+			break;
+			
+		}
+		
+	}
+	if(ok==0){
+		p=NULL;
+	}
+	return p;
+}
+int my_len(char*str){
+    int len=0;
+	while(str[len]!='\0'){
+		len++;
+	} 
+	return len;
+} 
