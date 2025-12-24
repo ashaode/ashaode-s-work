@@ -1,0 +1,45 @@
+#include<stdio.h>
+struct note{
+	int sal;
+	int pdt;
+	float amont;
+};
+int main(){
+	int n;
+	scanf("%d",&n);
+	struct note notes[n];
+	for(int i=0;i<n;i++){
+		scanf("%d %d %f",&notes[i].sal,&notes[i].pdt,&notes[i].amont);
+		
+	}//读入数据；（便条） 
+	int sal=4,pro=5;
+	//int sumsal=5,sumpro=4;
+	float table[5][6]={0};
+	for(int i=0;i<n;i++){
+		int a=notes[i].sal-1;
+		int b=notes[i].pdt-1;
+		table[a][b]+=notes[i].amont;
+		//printf("this data is:%lf\n",notes[i].amont); 
+	}//填表 
+	for(int i=0;i<pro;i++){
+		for(int j=0;j<sal;j++){
+			table[sal][i]+=table[j][i]; 
+		}
+	}//对商品求和 
+	for(int i=0;i<sal+1;i++){
+		for(int j=0;j<pro;j++){
+			table[i][pro]+=table[i][j];
+		}
+	}//对员工求和 
+	for(int i=0;i<pro+1;i++){
+		for(int j=0;j<sal+1;j++){
+			printf("%.1f",table[j][i]);
+			if(j<sal){
+				printf("\t");
+			}else{
+				printf("\n");
+			}
+		}
+	}//输出 
+	
+}
