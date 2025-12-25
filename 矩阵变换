@@ -1,0 +1,60 @@
+#include<stdio.h>
+void swh(int a,int b,int n,int martix[][n]);
+int main(){
+	int n=0;
+	scanf("%d",&n);
+	int martix[n][n+1];
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n+1;j++){
+			martix[i][j]=0;
+		}
+	}//初始化 
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			scanf("%d",&martix[i][j]);
+		}
+	}//输入部分；
+	for(int j=0;j<n;j++){
+		for(int i=0;i<n;i++){
+			martix[j][n]+=martix[j][i];
+		}
+	} //处理累加；
+//	for(int i=0;i<n;i++){
+//		printf("sum=%d",martix[i][n]);
+//		
+//	} //测试；
+int cnt=1;
+	while(cnt>0){
+		cnt=0;
+		for(int i=0;i<n-1;i++){
+			
+			if(martix[i][n]>martix[i+1][n]){
+				//出现逆序；
+				swh(i,i+1,n+1,martix);
+				//交换； 
+				cnt++; //判断器加一； 
+			}
+		}
+	}//排序；
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			printf("%d",martix[i][j]);
+			if(j<n-1){
+				printf(" ");
+			}else{
+				printf("\n");
+			}
+		}
+	}//输出 
+	return 0; 
+	
+}
+void swh(int a,int b,int n,int martix[][n]){
+	for(int i=0;i<n;i++){
+		int temp=0;
+		temp=martix[a][i];
+		martix[a][i]=martix[b][i];
+		martix[b][i]=temp;
+	}
+	
+} //swh函数； 
