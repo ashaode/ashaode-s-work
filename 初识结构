@@ -1,0 +1,71 @@
+#include<stdio.h>
+struct student{
+	char name[21];
+	char id[21];
+	int score[5];
+	double average;
+	int total;
+};
+void sort(struct student *stu);
+int main(){
+	struct student stu;
+	stu.total=0;
+	for(int i=0;i<21;i++){
+		stu.name[i]='\0';
+		stu.id[i]='\0';
+	}
+	scanf("%20[^\n]",stu.name);
+	getchar();
+	
+	//测试printf("%s",stu.name);
+	scanf("%s",stu.id) ;
+	getchar();
+	scanf("%d %d %d %d %d",&stu.score[0],&stu.score[1],&stu.score[2],&stu.score[3],&stu.score[4]);
+	//printf("name is%s",stu.id);
+	//读取数据
+	 
+	for(int i=0;i<5;i++){
+		stu.total+=stu.score[i];
+	}//求和 
+	stu.average=stu.total/5.0;//计算平均值 
+	sort(&stu);//排序； 
+	printf("Name:%s\n",stu.name);
+	printf("ID:%s\n",stu.id);
+	printf("Score:");
+	for(int i=0;i<5;i++){
+		printf("%d",stu.score[i]);
+		if(i<4){
+			printf(" ");
+		}else{
+			
+			printf("\n");
+		}
+	
+	}
+	printf("average:%.2lf total:%d\n",stu.average,stu.total) ;
+	//输出 
+	
+	
+	return 0;
+}
+void sort(struct student *stu){
+	//测试printf("%d",stu->score[0]);
+	int cnt=0; 
+	while(cnt<4){
+		cnt=0;
+		for(int i=0;i<4;i++){
+			if(stu->score[i]<stu->score[i+1]){
+			//交换
+			int temp=0;
+			temp=stu->score[i] ;
+			stu->score[i]=stu->score[i+1];
+			stu->score[i+1]=temp;
+			
+		}else{
+			cnt++;//记录正序次数； 
+		}
+		}
+		//printf("working,cnt==%d\n",cnt); 
+	}
+	
+}
