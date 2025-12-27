@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<string.h>
+struct student{
+	char id[20];
+	char name[20];
+	int score1;
+	int score2;
+	int score3;
+	
+	
+};//定义结构体· 
+int main(){
+	int n;
+	scanf("%d",&n);//读入操作数
+
+	struct student stu[n];
+	struct student temp;//临时储存
+	struct student zero={"0","0",0,0,0};//定义清零结构体； 
+	for(int i=0;i<n;i++){
+			
+		strcpy(stu[i].id,"");
+		
+	} 
+	int cnt=0;
+	
+	while(cnt<n){
+		
+		int ope=0;
+		while(getchar()!='\n');
+		scanf("%d",&ope);
+		
+		switch(ope){
+			case 1://功能一：添加学生信息
+			
+					scanf("%s %s %d %d %d",temp.id,temp.name,&temp.score1,&temp.score2,&temp.score3);
+					//读入并临时储存信息；
+					int alreadyexist=0; 
+					for(int i=0;i<n&&alreadyexist==0;i++){ 
+			    	 if(strcmp(stu[i].id,temp.id)==0){
+			     	printf("Students already exist\n");
+			     	alreadyexist++;
+			     	
+				 		} 
+					}//判断学生是否已经存在；
+					if(alreadyexist==0){//学生不存在 
+					 stu[cnt]=temp;
+					 printf("Add success\n");
+					}
+					cnt++;
+					temp=zero; 
+					break; 
+			case 2://删除学生信息：
+					
+					scanf("%s",temp.id);
+					int exist2=0;
+					for(int i=0;i<n;i++){
+						if(strcmp(temp.id,stu[i].id)==0){
+							stu[i]=zero;
+							printf("Delete success\n");
+							exist2++;
+							break;
+						}
+					}
+					if(exist2==0){
+						printf("Students do not exist\n");
+					}
+					temp=zero;
+					cnt++;
+					break;
+			case 3: //更改学生成绩 
+					scanf("%s %d %d %d",temp.id,&temp.score1,&temp.score2,&temp.score3);
+					int exist3=0;
+					for(int i=0;i<n;i++){
+						if(strcmp(temp.id,stu[i].id)==0){
+							stu[i].score1=temp.score1;
+							stu[i].score2=temp.score2;
+							stu[i].score3=temp.score3;
+							printf("Update success\n");
+							exist3++;
+							break;
+						}
+					}
+					if(exist3==0){
+						printf("Students do not exist\n");
+					}
+					cnt++;
+					temp=zero;
+					break;
+					
+			case 4://显示学生平均成绩；
+					 scanf("%s",temp.id);
+					int exist4=0;
+					for(int i=0;i<n;i++){
+						if(strcmp(temp.id,stu[i].id)==0){
+							double average=0;
+							average=(stu[i].score1+stu[i].score2+stu[i].score3)/3.0;
+							printf("Student ID:%s\nName:%s\nAverage Score:%.1lf\n",stu[i].id,stu[i].name,average);
+							exist4++;
+							break;
+						}
+					}
+					if(exist4==0){
+						printf("Students do not exist\n");
+					}
+					temp=zero;
+					cnt++;
+					break;
+					
+					
+									
+			default:
+				cnt++; 
+				break;		
+		}
+	
+	}
+	//printf("ok***\n");
+	return 0;
+}
